@@ -10,8 +10,8 @@ print(xzrq)
 t = time.time()
 rq=(str(int(t)))
 print(rq)
-zh = "202153210246"###########################你的学工账号学号
-deomo_val = '050199'#########################你的学工密码身份证后6
+zh = "20215321****"###########################你的学工账号学号
+deomo_val = '******'#########################你的学工密码身份证后6
 md5_val = hashlib.md5(deomo_val.encode('utf8')).hexdigest()
 print(md5_val)
 j =(md5_val[:30])
@@ -69,8 +69,8 @@ data = [
   ('jzdShi.dm', '430200'),
   ('jzdXian.dm', '430202'),
   ('jzdDz', '湖南汽车工程职业学院'),
-  ('jzdDz2', '3栋南626'),
-  ('lxdh', '19937814687'),
+  ('jzdDz2', ''),#寝室楼和寝室号
+  ('lxdh', ''),#手机号
   ('sfzx', '1'),
   ('sfzx1', '在校'),
   ('twM.dm', '01'),
@@ -108,7 +108,7 @@ def post():
 print(post())
 u=(post())
 def tuisong():
-    key= "SCT114092TdaLtRYOnxp0vLc0wwZAau4V6"#微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
+    key= ""#微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
     api = "https://sc.ftqq.com/"+key+".send"
     data = {
         "title":"打卡成功",
