@@ -4,14 +4,17 @@ import requests
 import time
 from datetime import datetime
 import hashlib
+zh = ""###########################你的学工账号学号
+deomo_val = ''#########################你的学工密码身份证后6位
+cjdz = ""#############################常局地址如1栋南110
+lxdh = ""#########################手机号
+hs = "否"#####################################是否核酸 是/否
 dt01 = datetime.today()
 xzrq=(dt01.date())
 print(xzrq)
 t = time.time()
 rq=(str(int(t)))
 print(rq)
-zh = "20215321****"###########################你的学工账号学号
-deomo_val = '******'#########################你的学工密码身份证后6
 md5_val = hashlib.md5(deomo_val.encode('utf8')).hexdigest()
 print(md5_val)
 j =(md5_val[:30])
@@ -69,8 +72,8 @@ data = [
   ('jzdShi.dm', '430200'),
   ('jzdXian.dm', '430202'),
   ('jzdDz', '湖南汽车工程职业学院'),
-  ('jzdDz2', ''),#寝室楼和寝室号
-  ('lxdh', ''),#手机号
+  ('jzdDz2', cjdz),
+  ('lxdh', lxdh),
   ('sfzx', '1'),
   ('sfzx1', '在校'),
   ('twM.dm', '01'),
@@ -97,18 +100,18 @@ data = [
   ('xgym', ''),
   ('xgym1', ''),
   ('hsjc', '1'),
-  ('hsjc1', '是'),
+  ('hsjc1', hs),
   ('bz', ''),
   ('operationType', 'Create'),
   ('dm', ''),
 ]
-def post():
+def postt():
     r = requests.post(url,data=data, headers=headers)
     return r.text
-print(post())
-u=(post())
+print(postt())
+u=(postt())
 def tuisong():
-    key= ""#微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
+    key= "SCT114092TdaLtRYOnxp0vLc0wwZAau4V6"#微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
     api = "https://sc.ftqq.com/"+key+".send"
     data = {
         "title":"打卡成功",
@@ -117,6 +120,7 @@ def tuisong():
     req = requests.post(api, data=data).json()
     print(req)
 print(tuisong())
-
-
-
+def main_handler(event, context):
+    return post()
+if __name__ == '__main__':
+    post()
