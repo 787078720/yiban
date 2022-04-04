@@ -111,7 +111,7 @@ def postt():
 print(postt())
 u=(postt())
 def tuisong():
-    key= "SCT114092TdaLtRYOnxp0vLc0wwZAau4V6"#微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
+    key= ""#微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
     api = "https://sc.ftqq.com/"+key+".send"
     data = {
         "title":"打卡成功",
