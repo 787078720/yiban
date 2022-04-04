@@ -4,10 +4,10 @@ import requests
 import time
 from datetime import datetime
 import hashlib
-zh = ""###########################你的学工账号学号
-deomo_val = ''#########################你的学工密码身份证后6位
-cjdz = ""#############################常局地址如1栋南110
-lxdh = ""#########################手机号
+zh = "202153210246"###########################你的学工账号学号
+deomo_val = '050199'#########################你的学工密码身份证后6位
+cjdz = "3栋南626"#############################常局地址如1栋南110
+lxdh = "19937814687"#########################手机号
 hs = "否"#####################################是否核酸 是/否
 dt01 = datetime.today()
 xzrq=(dt01.date())
@@ -111,7 +111,7 @@ def postt():
 print(postt())
 u=(postt())
 def tuisong():
-    key= ""#微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
+    key= "SCT114092TdaLtRYOnxp0vLc0wwZAau4V6"#微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
     api = "https://sc.ftqq.com/"+key+".send"
     data = {
         "title":"打卡成功",
@@ -121,6 +121,7 @@ def tuisong():
     print(req)
 print(tuisong())
 def main_handler(event, context):
-    return post()
+    r = "1"
+    return r
 if __name__ == '__main__':
     post()
