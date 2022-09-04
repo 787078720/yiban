@@ -4,13 +4,14 @@ import requests
 import time
 from datetime import datetime
 import hashlib
+import urllib3
 #-------------------------------------------------------变量信息----------------------------------------------------------------#
 
 zhh={
-    1:"",###第一个账号
+    1:"202153210231",###第一个账号
 }
 mmm={
-    1: "",###第一个账号密码
+    1: "666666",###第一个账号密码
 }
 n=0+1
 zs = len(zhh)
@@ -75,6 +76,19 @@ dkd=get_xxx()['dkd']
 jzdDz2=get_xxx()['jzdDz2']
 lxdh = get_xxx()["lxdh"]
 print(get_xxx())
+# ----------------------------------------------------------校验加密--------------------------------------------------------------#
+def jm():
+    http = urllib3.PoolManager()
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+        'Cookie':'JSESSIONID='+cooick1}
+    resp = http.request('GET', 'http://xggl.hnqczy.com/wap/menu/student/temp/zzdk/_child_/edit?_t_s_=1661742092205',
+                        headers=headers, )
+    sj = (resp.data.decode())
+    zzdk_token = (sj[sj.index('zzdk_token" value=\"') + 19:])
+    zzdk_token = (zzdk_token[:zzdk_token.index('"/>')])
+    return str(zzdk_token)
+print(jm())
 # ----------------------------------------------------------打卡--------------------------------------------------------------#
 def post_xxx():
     url="http://xggl.hnqczy.com/content/student/temp/zzdk?_t_s_=1661311939332"
@@ -92,9 +106,9 @@ def post_xxx():
         'JSESSIONID':cooick1,
     }
     post_data = str("dkdz="+dkdz+
-                    "&dkdzZb=111.795074%2C28.592226"
+                    "&dkdzZb=111.795036,28.592264"
                     "&dkly=yiban"
-                    "&zzdk_token=h01xr2"
+                    "&zzdk_token="+str(jm())+
                     "&dkd="+dkd+
                     "&jzdValue=430000%2C430200%2C430202"
                     "&jzdSheng.dm=430000"
@@ -141,16 +155,23 @@ def post_xxx():
     post_data=post_data.encode('utf-8')
     rsp = requests.post(url,headers=headers, data=post_data,cookies=cookies).json()
     return rsp
+print(post_xxx())
+if post_xxx()['result']=='true':
+    tt="打卡成功"
+else:
+    tt="打卡失败"
+# ----------------------------------------------------------推送--------------------------------------------------------------#
 def ts():
-    key = "SCT114092TdaLtRYOnxp0vLc0wwZAau4V6"  # 微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
+    key = ""  # 微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
     api = "https://sc.ftqq.com/" + key + ".send"
     data = {
-        "title": "打卡成功",
+        "title": str(tt),
         "desp":str(post_xxx())
     }
     reqq = requests.post(api, data=data).json()
     return reqq
-print(ts())
 def main_handler(event, context):
     print(post_xxx())
 if __name__ == '__main__':
+    print(post_xxx())
+
