@@ -170,6 +170,7 @@ def ts():
     }
     reqq = requests.post(api, data=data).json()
     return reqq
+print(ts())
 def main_handler(event, context):
     print(post_xxx())
 if __name__ == '__main__':
