@@ -8,7 +8,7 @@ import urllib3
 #-------------------------------------------------------变量信息----------------------------------------------------------------#
 
 zhh={
-    1:"202153210231",###第一个账号
+    1:"202153210000",###第一个账号
 }
 mmm={
     1: "666666",###第一个账号密码
@@ -162,7 +162,7 @@ else:
     tt="打卡失败"
 # ----------------------------------------------------------推送--------------------------------------------------------------#
 def ts():
-    key = ""  # 微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
+    key = "填写"  # 微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
     api = "https://sc.ftqq.com/" + key + ".send"
     data = {
         "title": str(tt),
@@ -172,7 +172,7 @@ def ts():
     return reqq
 print(ts())
 def main_handler(event, context):
-    print(post_xxx())
-if __name__ == '__main__':
-    print(post_xxx())
+    if __name__ == '__main__':
+        print("1")
+
 
