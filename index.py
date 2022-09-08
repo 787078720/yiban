@@ -155,11 +155,12 @@ def post_xxx():
     post_data=post_data.encode('utf-8')
     rsp = requests.post(url,headers=headers, data=post_data,cookies=cookies).json()
     return rsp
-print(post_xxx())
-if post_xxx()['result']=='true':
-    tt="打卡成功"
+xi=str(post_xxx())
+if "已打卡，请勿重复提交" in xi:
+    tt = "打卡成功"
 else:
-    tt="打卡失败"
+    tt = '打卡失败'
+print(tt)
 # ----------------------------------------------------------推送--------------------------------------------------------------#
 def ts():
     key = "填写"  # 微信推送key这里    链接获取#https://sct.ftqq.com/sendkey
