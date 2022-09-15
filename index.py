@@ -8,10 +8,10 @@ import urllib3
 #-------------------------------------------------------变量信息----------------------------------------------------------------#
 
 zhh={
-    1:"202153210000",###第一个账号
+    1:"202153",###第一个账号
 }
 mmm={
-    1: "666666",###第一个账号密码
+    1: "密码",###第一个账号密码
 }
 n=0+1
 zs = len(zhh)
@@ -156,7 +156,7 @@ def post_xxx():
     rsp = requests.post(url,headers=headers, data=post_data,cookies=cookies).json()
     return rsp
 xi=str(post_xxx())
-if "已打卡，请勿重复提交" in xi:
+if "True" in xi:
     tt = "打卡成功"
 else:
     tt = '打卡失败'
@@ -175,5 +175,3 @@ print(ts())
 def main_handler(event, context):
     if __name__ == '__main__':
         print("1")
-
-
