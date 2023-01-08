@@ -127,6 +127,6 @@ def ts():
     return reqq
 print(ts())
 def main_handler(event, context):
-    1==1
+    print(jg)
 if __name__ == '__main__':
     1==1
