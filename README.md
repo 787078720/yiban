@@ -12,6 +12,7 @@
 8.25号发现还是有问题会出现非法请求的情况  
 9.04修复所有问题，完美打卡  
 9.05有一个小bug不会推送，已经修复
+2023.1.8修复点问题
 ![K)_MJLP TMQ(`YC@1F (58J](https://user-images.githubusercontent.com/85841713/188317059-6f2e5269-5513-4f5e-bdff-fc8ba62b5cf9.png)
   
 ![I$L 2JEL$BC(T`GYSS M7A2](https://user-images.githubusercontent.com/85841713/188317064-f173b3f9-6d4d-48c5-bd9d-81598179760f.png)  
