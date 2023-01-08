@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 import hashlib
 import urllib3
+from urllib import parse
 #-------------------------------------------------------变量信息----------------------------------------------------------------#
 zhh={
     1:"2021",###第一个账号
@@ -51,9 +52,14 @@ def get_xxx():
     rsp =requests.get(url, headers,cookies=cookies).json()
     return rsp
 hqjl=get_xxx()
-dkd=hqjl['dkd']
-jzdDz2=hqjl['jzdDz2']
-lxdh = hqjl["lxdh"]
+print(hqjl)
+dkd=str(hqjl['dkd'])
+jzdDz=str(hqjl["jzdDz"])
+jzdDz2=str(hqjl['jzdDz2'])
+lxdh = str(hqjl["lxdh"])
+dm=str(hqjl["jzdSheng"]["dm"])
+dm1=str(hqjl["jzdShi"]["dm"])
+dm2=str(hqjl["jzdXian"]["dm"])
 # ----------------------------------------------------------校验加密--------------------------------------------------------------#
 def jm():
     http = urllib3.PoolManager()
@@ -66,65 +72,46 @@ def jm():
     zzdk_token = (sj[sj.index('zzdk_token" value=\"') + 19:])
     zzdk_token = (zzdk_token[:zzdk_token.index('"/>')])
     return str(zzdk_token)
-print(jm())
+jm=jm()
+print(jm)
 # ----------------------------------------------------------打卡--------------------------------------------------------------#
 def post_xxx():
-    url="http://xggl.hnqczy.com/content/student/temp/zzdk?_t_s_=1661311939332"
-    headers = {}
+    sjc=str(time.time())
+    url="http://xggl.hnqczy.com/content/student/temp/zzdk?_t_s_=1673140784571"
+    headers = {'Host': 'xggl.hnqczy.com',
+               'Connection': 'keep-alive',
+               'Accept': '*/*',
+               'X-Requested-With': 'XMLHttpRequest',
+               'User-Agent': 'Mozilla/5.0 (Linux; Android 12; 22081212C Build/SKQ1.220303.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/95.0.4638.74 Mobile Safari/537.36;webank/h5face;webank/1.0 yiban_android/5.0.14',
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+               'Origin': 'http://xggl.hnqczy.com',
+               'Referer': 'http://xggl.hnqczy.com/wap/menu/student/temp/zzdk/_child_/edit?_t_s_='+sjc,
+               'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7'}
     cookies = {
         'JSESSIONID':cooick1,
     }
     post_data = str("dkdz="+dkd+
-                    "&dkdzZb=111.795074%2C28.592226"
+                    "&dkdzZb=111.71111,28.589999"
                     "&dkly=yiban"
-                    "&zzdk_token="+str(jm())+
+                    "&zzdk_token="+jm+
+                    "&xcmTjd="
                     "&dkd="+dkd+
-                    "&jzdValue=430000%2C430200%2C430202"
-                    "&jzdSheng.dm=430000"
-                    "&jzdShi.dm=430200"
-                    "&jzdXian.dm=430202"
-                    "&jzdDz=湖南汽车工程职业学院"
+                    "&jzdValue="+dm+","+dm1+","+dm2+
+                    "&jzdSheng.dm="+dm+
+                    "&jzdShi.dm="+dm1+
+                    "&jzdXian.dm="+dm2+
+                    "&jzdDz="+jzdDz+
                     "&jzdDz2="+jzdDz2+
                     "&lxdh="+lxdh+
-                    "&sfzx=1&sfzx1=%E5%9C%A8%E6%A0%A1"
-                    "&twM.dm=01"
-                    "&tw1=%5B35.0~37.2%5D%E6%AD%A3%E5%B8%B8"
-                    "&tw1M.dm="
-                    "&tw11="
-                    "&tw2M.dm="
-                    "&tw12="
-                    "&tw3M.dm="
-                    "&tw13="
-                    "&yczk.dm=01"
-                    "&yczk1=无症状"
-                    "&fbrq="
-                    "&jzInd=0"
-                    "&jzYy="
-                    "&zdjg="
-                    "&fxrq="
-                    "&brStzk.dm=01"
-                    "&brStzk1=身体健康、无异常"
-                    "&brJccry.dm=01"
-                    "&brJccry1=未接触传染源"
-                    "&jrStzk.dm=01"
-                    "&jrStzk1=身体健康、无异常"
-                    "&jrJccry.dm=01"
-                    "&jrJccry1=未接触传染源"
-                    "&jkm=1"
-                    "&jkm1=绿色"
-                    "&xcm=1"
-                    "&xcm1=绿色"
-                    "&xgym="
-                    "&xgym1="
-                    "&hsjc=1"
-                    "&hsjc1="
-                    "&bz="
-                    "&operationType=Create"
-                    "&dm=")
-    post_data=post_data.encode('utf-8')
-    rsp = requests.post(url,headers=headers, data=post_data,cookies=cookies).json()
+                    "&sfzx=1&sfzxText=不在校"
+                    "&twM.dm=01&twMText=[35.0~37.2]正常&yczk.dm=01&yczkText=无症状&brStzk.dm=01&brStzkText=身体健康、无异常&brJccry.dm=01&brJccryText=未接触传染源&jrStzk.dm=01&jrStzkText=身体健康、无异常&jrJccry.dm=01&"
+                    "jrJccryText=未接触传染源&xgym=2&xgymText=已接种已完成&hsjc=0&hsjcText=否&zdy1=0&zdy2=&operationType=Create&dm=&tw1M.dm=&tw2M.dm=&tw3M.dm=&jkm=1&xcm=1&jkmcl=&zdy3=&zdy4=&zdy5=&zdy6=&bz=")
+    print(post_data)
+    rsp = requests.post(url,headers=headers, data=post_data.encode('UTF-8'),cookies=cookies).json()
     return rsp
-if post_xxx()['result']=='true':
+jg=post_xxx()
+print(jg)
+if jg['result']=='true':
     tt="打卡成功"
 else:
     tt="打卡失败"
@@ -134,13 +121,12 @@ def ts():
     api = "https://sc.ftqq.com/" + key + ".send"
     data = {
         "title": str(tt),
-        "desp":str(post_xxx())
+        "desp":str(jg)
     }
     reqq = requests.post(api, data=data).json()
     return reqq
 print(ts())
 def main_handler(event, context):
-    print(post_xxx())
+    1==1
 if __name__ == '__main__':
-    print(post_xxx())
-
+    1==1
