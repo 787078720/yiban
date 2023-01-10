@@ -111,7 +111,7 @@ def post_xxx():
     return rsp
 jg=post_xxx()
 print(jg)
-if jg['result']=='true':
+if str(jg['result']) == 'true':
     tt="打卡成功"
 else:
     tt="打卡失败"
